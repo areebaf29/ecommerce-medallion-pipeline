@@ -18,7 +18,7 @@ data/landing/*.csv  ->  BRONZE (raw, all strings + ingestion_ts + source_file)
 |---|---|
 | Bronze | Incremental CSV ingestion with a checkpoint. Only new files are read on each run. Adds `ingestion_ts` and `source_file`. |
 | Silver | Trims and standardises text, casts types, calculates `order_amount = qty * price * (1 - discount%)`, applies six validation rules, removes duplicate order IDs (keeps earliest ingested). Valid and rejected rows go to separate tables with a `rejection_reasons` column. |
-| Gold | Revenue by city, category and product (delivered orders only), payment mode analysis, delivered-orders table, plus a reconciliation check. |
+| Gold | Revenue by city, category and product (delivered orders only), payment mode analysis (all valid orders, any status), a delivered-orders table (2,123 rows in the included run), plus reconciliation checks for each scope. |
 
 ### Validation rules
 R1 city present, R2 quantity is a positive integer, R3 unit price > 0, R4 discount between 0 and 100, R5 order date is a real date, R6 payment mode is a known value. Duplicate order IDs are rejected as `DUP_duplicate_order_id`.
@@ -44,7 +44,7 @@ python -m pytest ../tests -q      # 6 Spark-backed tests (about 5 min on 1 core)
 To see incremental ingestion, run the pipeline with only `orders_batch_1.csv` in `data/landing`, then add `orders_batch_2.csv` and run again.
 
 ## Tests
-Six tests run real Spark jobs: each of the six rules fires with its own reason, null and malformed values are rejected without crashing, valid + rejected rows always equal bronze rows, re-running with no new files ingests nothing, a duplicate order ID arriving in a later batch is rejected (earliest copy kept), and gold revenue reconciles and counts only delivered orders. Writing these caught a real bug: a blank payment mode slipped through rule R6 (fixed).
+Six tests run real Spark jobs: each of the six rules fires with its own reason, null and malformed values are rejected without crashing, valid + rejected rows always equal bronze rows, re-running with no new files ingests nothing, a duplicate order ID arriving in a later batch is rejected (earliest copy kept), and the gold revenue tables count only delivered orders and reconcile to Silver, while the payment table reconciles to all valid orders. Writing these caught a real bug: a blank payment mode slipped through rule R6 (fixed).
 
 ## Limitations / next steps
 - Synthetic data, single machine, no orchestration or scheduling.
