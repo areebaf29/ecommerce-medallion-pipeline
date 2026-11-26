@@ -1,0 +1,14 @@
+{
+  "bronze_rows": 3100,
+  "silver_valid": 2458,
+  "silver_rejected": 642,
+  "reconciliation": {
+    "silver_delivered_revenue": 3405995.3,
+    "city_sales": 3405995.3,
+    "city_sales_ok": true,
+    "category_sales": 3405995.3,
+    "category_sales_ok": true,
+    "product_revenue": 3405995.3,
+    "product_revenue_ok": true
+  }
+}
