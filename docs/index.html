@@ -1,0 +1,81 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Medallion Pipeline: Results Explorer</title>
+<style>
+:root{--bg:#f3ead9;--ink:#26211d;--card:#fbf6ea;--line:#d9ccb2;--rust:#b4472a;--plum:#6b3a52;--ochre:#c9962b;--taupe:#8a7b68;--sage:#6f8460}
+*{box-sizing:border-box}body{font-family:Inter,"Helvetica Neue",Arial,sans-serif;margin:0;background:var(--bg);color:var(--ink);line-height:1.45}
+.wrap{max-width:1040px;margin:auto;padding:0 18px}
+header{padding:40px 0 22px;border-bottom:2px solid var(--ink)}
+.kick{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rust);font-weight:700}
+h1{font-size:clamp(30px,6vw,54px);line-height:1.02;margin:8px 0 12px;letter-spacing:-.02em;font-weight:800}
+header p{max-width:680px;margin:0;font-size:16px}
+.note{border-left:5px solid var(--ochre);background:var(--card);padding:12px 16px;margin:20px 0;font-size:14px}
+h2{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin:34px 0 10px;color:var(--taupe)}
+h2 b{color:var(--rust);margin-right:8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:16px;margin:12px 0}
+.layers{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.layer{border-radius:6px;padding:14px;color:#fff}.L1{background:var(--rust)}.L2{background:var(--taupe)}.L3{background:var(--ochre);color:var(--ink)}
+.layer .n{font-size:34px;font-weight:800;letter-spacing:-.02em}.layer small{display:block;font-size:13px}
+svg{width:100%;height:auto;display:block}
+.row{display:grid;grid-template-columns:130px 1fr auto;gap:10px;align-items:center;margin:6px 0;font-size:14px}
+.row .t{background:#e9dcc0;border-radius:3px;height:18px}.row .bar{height:18px;border-radius:3px;background:var(--plum)}
+.rej .bar{background:var(--rust)}.rej .row{grid-template-columns:200px 1fr auto}
+table{border-collapse:collapse;width:100%;font-size:13px}th{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--taupe)}
+td,th{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}.scroll{overflow-x:auto}
+select{padding:7px 10px;border:1.5px solid var(--ink);background:var(--card);color:var(--ink);font-size:14px;border-radius:4px}
+.ok{color:var(--sage);font-weight:700}
+.q{display:grid;grid-template-columns:1fr 1fr;gap:12px}.q div{font-size:14px}.q b{display:block;color:var(--plum)}
+footer{padding:26px 0 40px;font-size:12px;color:var(--taupe)}
+@media(max-width:640px){.layers,.q{grid-template-columns:1fr}.row,.rej .row{grid-template-columns:1fr auto}.row .t{grid-column:1/3;order:3}.layer .n{font-size:28px}}
+</style></head><body><div class="wrap">
+<header><div class="kick">Data engineering portfolio project</div>
+<h1>From messy orders to numbers you can trust.</h1>
+<p>Raw e-commerce order files go through a Bronze, Silver and Gold pipeline built with PySpark and Delta Lake. Bad records are kept and explained, not silently dropped.</p></header>
+<div class="note"><b>What is live on this page:</b> the charts, the view switcher and the tables. <b>What is not live:</b> the pipeline. It ran locally on PySpark + Delta Lake (not Databricks) with generated data, and this page shows its saved results.</div>
+
+<h2><b>01</b>The question it answers</h2>
+<div class="q card"><div><b>Which cities, categories and products earn the money?</b>Gold tables count only delivered orders.</div>
+<div><b>Can I trust those numbers?</b>Six validation rules plus duplicate removal, and a check that every gold table adds up to the same total.</div></div>
+
+<h2><b>02</b>How data flows</h2>
+<div class="card scroll"><svg style="min-width:560px" viewBox="0 0 800 190" role="img" aria-label="Pipeline diagram">
+<g font-family="Arial" font-size="14" fill="#26211d">
+<rect x="10" y="50" width="150" height="90" rx="6" fill="#fbf6ea" stroke="#26211d" stroke-width="2"/><text x="85" y="88" text-anchor="middle" font-weight="700">CSV files</text><text x="85" y="108" text-anchor="middle" font-size="12">landing folder</text>
+<path d="M165 95h50" stroke="#26211d" stroke-width="2"/><path d="M215 95l-9-6v12z" fill="#26211d"/>
+<rect x="220" y="50" width="150" height="90" rx="6" fill="#b4472a"/><text x="295" y="88" text-anchor="middle" fill="#fff" font-weight="700">BRONZE</text><text x="295" y="108" text-anchor="middle" fill="#fff" font-size="12">raw + lineage</text>
+<path d="M375 95h50" stroke="#26211d" stroke-width="2"/><path d="M425 95l-9-6v12z" fill="#26211d"/>
+<rect x="430" y="50" width="150" height="90" rx="6" fill="#8a7b68"/><text x="505" y="88" text-anchor="middle" fill="#fff" font-weight="700">SILVER</text><text x="505" y="108" text-anchor="middle" fill="#fff" font-size="12">clean + 6 rules</text>
+<path d="M585 95h50" stroke="#26211d" stroke-width="2"/><path d="M635 95l-9-6v12z" fill="#26211d"/>
+<rect x="640" y="50" width="150" height="90" rx="6" fill="#c9962b"/><text x="715" y="88" text-anchor="middle" font-weight="700">GOLD</text><text x="715" y="108" text-anchor="middle" font-size="12">business tables</text>
+<path d="M505 145v22h-40" stroke="#b4472a" stroke-width="2" fill="none" stroke-dasharray="5 4"/><text x="455" y="172" text-anchor="end" fill="#b4472a" font-size="12">rejected table + reason</text>
+<text x="85" y="30" text-anchor="middle" font-size="12" fill="#8a7b68">batch 1, then batch 2</text></g></svg></div>
+<div class="layers" id="flow"></div>
+
+<h2><b>03</b>Gold: revenue from delivered orders</h2>
+<div class="card"><label>View by <select id="dim"><option value="city_sales">City</option><option value="category_sales">Category</option><option value="product_revenue">Product</option></select></label>
+<div id="chart" style="margin-top:12px"></div></div>
+<div class="card"><p style="font-size:13px;margin-top:0"><b>Payment modes cover all 4,095 valid orders of any status</b> (delivered, shipped, cancelled, returned), not only the delivered ones charted above.</p><div class="scroll"><table id="pay"></table></div></div>
+
+<h2><b>04</b>Silver: why records were rejected</h2>
+<div class="card rej"><p style="font-size:13px;margin-top:0">One record can break several rules. For duplicate order IDs the earliest ingested copy is kept.</p><div id="rej"></div></div>
+<div class="card"><div class="scroll"><table id="samp"></table></div></div>
+
+<h2><b>05</b>Do the numbers add up?</h2>
+<div class="card" id="rec"></div>
+<footer>Synthetic data. Portfolio project by Areeba Fatima.</footer></div>
+<script>
+fetch('data.json').then(r=>r.json()).then(d=>{
+const f=n=>Number(n).toLocaleString('en-IN'),c=d.counts;
+document.getElementById('flow').innerHTML=
+`<div class="layer L1"><b>BRONZE</b><div class="n">${f(c.bronze_rows)}</div><small>raw rows ingested</small></div>
+<div class="layer L2"><b>SILVER</b><div class="n">${f(c.silver_valid)}</div><small>valid rows, ${f(c.silver_rejected)} rejected</small></div>
+<div class="layer L3"><b>GOLD</b><div class="n">${f(c.delivered_orders)}</div><small>delivered orders in 5 tables</small></div>`;
+function chart(){const k=document.getElementById('dim').value,rows=[...d[k]].sort((a,b)=>b.revenue-a.revenue),key=k=='city_sales'?'city':k=='category_sales'?'category':'product',max=rows[0].revenue;
+document.getElementById('chart').innerHTML=rows.map(r=>`<div class="row"><div>${r[key]}</div><div class="t"><div class="bar" style="width:${r.revenue/max*100}%"></div></div><div>₹${f(r.revenue)}</div></div>`).join('')}
+document.getElementById('dim').onchange=chart;chart();
+document.getElementById('pay').innerHTML='<tr><th>Payment mode</th><th>Orders</th><th>Order amount</th><th>Avg order</th></tr>'+[...d.payment_mode_analysis].sort((a,b)=>b.orders-a.orders).map(r=>`<tr><td>${r.payment_mode}</td><td>${f(r.orders)}</td><td>₹${f(r.gross_amount)}</td><td>₹${f(r.avg_order_value)}</td></tr>`).join('');
+const m=Math.max(...d.rejection_reasons.map(r=>r.count));
+document.getElementById('rej').innerHTML=d.rejection_reasons.map(r=>`<div class="row"><div>${r.reason}</div><div class="t"><div class="bar" style="width:${r.count/m*100}%"></div></div><div>${r.count}</div></div>`).join('');
+document.getElementById('samp').innerHTML='<tr><th>Order</th><th>City</th><th>Qty</th><th>Price</th><th>Payment</th><th>Reasons</th></tr>'+d.sample_rejected.map(r=>`<tr><td>${r.order_id}</td><td>${r.city??'(missing)'}</td><td>${r.quantity??'(null)'}</td><td>${r.unit_price}</td><td>${r.payment_mode}</td><td>${r.rejection_reasons}</td></tr>`).join('');
+const rc=d.reconciliation;document.getElementById('rec').innerHTML=`<p style="margin-top:0">Delivered revenue in Silver: <b>₹${f(rc.silver_delivered_revenue)}</b></p>`+['city_sales','category_sales','product_revenue'].map(n=>`<div>Gold ${n.replace('_',' ')}: ₹${f(rc[n])} <span class="ok">${rc[n+'_ok']?'matches':'MISMATCH'}</span></div>`).join('')+`<p>Delivered-only scope above. Payment mode table scope is all valid orders: Silver ₹${f(rc.silver_all_valid_amount)} vs Gold ₹${f(rc.payment_mode_analysis)} <span class="ok">${rc.payment_mode_analysis_ok?'matches':'MISMATCH'}</span></p>`;
+});
+</script></body></html>
