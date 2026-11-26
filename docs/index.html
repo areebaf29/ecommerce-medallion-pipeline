@@ -33,8 +33,8 @@ footer{padding:26px 0 40px;font-size:12px;color:var(--taupe)}
 <div class="note"><b>What is live on this page:</b> the charts, the view switcher and the tables. <b>What is not live:</b> the pipeline. It ran locally on PySpark + Delta Lake (not Databricks) with generated data, and this page shows its saved results.</div>
 
 <h2><b>01</b>The question it answers</h2>
-<div class="q card"><div><b>Which cities, categories and products earn the money?</b>Gold tables count only delivered orders.</div>
-<div><b>Can I trust those numbers?</b>Six validation rules plus duplicate removal, and a check that every gold table adds up to the same total.</div></div>
+<div class="q card"><div><b>Which cities, categories and products earn the money?</b>Revenue by city, category and product counts delivered orders only.</div>
+<div><b>Can I trust those numbers?</b>Six validation rules plus duplicate removal, and checks that the revenue tables add up to the delivered total and the payment table to the all-valid total.</div></div>
 
 <h2><b>02</b>How data flows</h2>
 <div class="card scroll"><svg style="min-width:560px" viewBox="0 0 800 190" role="img" aria-label="Pipeline diagram">
@@ -68,7 +68,7 @@ const f=n=>Number(n).toLocaleString('en-IN'),c=d.counts;
 document.getElementById('flow').innerHTML=
 `<div class="layer L1"><b>BRONZE</b><div class="n">${f(c.bronze_rows)}</div><small>raw rows ingested</small></div>
 <div class="layer L2"><b>SILVER</b><div class="n">${f(c.silver_valid)}</div><small>valid rows, ${f(c.silver_rejected)} rejected</small></div>
-<div class="layer L3"><b>GOLD</b><div class="n">${f(c.delivered_orders)}</div><small>delivered orders in 5 tables</small></div>`;
+<div class="layer L3"><b>GOLD</b><div class="n">${f(c.delivered_orders)}</div><small>rows in the delivered-orders table. Gold has 5 tables: city, category, product, payment mode, delivered orders.</small></div>`;
 function chart(){const k=document.getElementById('dim').value,rows=[...d[k]].sort((a,b)=>b.revenue-a.revenue),key=k=='city_sales'?'city':k=='category_sales'?'category':'product',max=rows[0].revenue;
 document.getElementById('chart').innerHTML=rows.map(r=>`<div class="row"><div>${r[key]}</div><div class="t"><div class="bar" style="width:${r.revenue/max*100}%"></div></div><div>₹${f(r.revenue)}</div></div>`).join('')}
 document.getElementById('dim').onchange=chart;chart();
