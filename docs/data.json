@@ -1,0 +1,325 @@
+{
+ "city_sales": [
+  {
+   "city": "Delhi",
+   "orders": 302,
+   "revenue": 745951.35,
+   "avg_order_value": 2470.04
+  },
+  {
+   "city": "Aurangabad",
+   "orders": 272,
+   "revenue": 676169.27,
+   "avg_order_value": 2485.92
+  },
+  {
+   "city": "Mumbai",
+   "orders": 333,
+   "revenue": 910306.61,
+   "avg_order_value": 2733.65
+  },
+  {
+   "city": "Chennai",
+   "orders": 316,
+   "revenue": 889051.9,
+   "avg_order_value": 2813.46
+  },
+  {
+   "city": "Pune",
+   "orders": 319,
+   "revenue": 808988.73,
+   "avg_order_value": 2536.01
+  },
+  {
+   "city": "Hyderabad",
+   "orders": 295,
+   "revenue": 772304.91,
+   "avg_order_value": 2617.98
+  },
+  {
+   "city": "Bengaluru",
+   "orders": 286,
+   "revenue": 674823.89,
+   "avg_order_value": 2359.52
+  }
+ ],
+ "category_sales": [
+  {
+   "category": "Fashion",
+   "units": 1694,
+   "revenue": 2845465.44
+  },
+  {
+   "category": "Electronics",
+   "units": 1588,
+   "revenue": 1488424.66
+  },
+  {
+   "category": "Stationery",
+   "units": 1040,
+   "revenue": 188270.79
+  },
+  {
+   "category": "Grocery",
+   "units": 1024,
+   "revenue": 319312.25
+  },
+  {
+   "category": "Home",
+   "units": 1021,
+   "revenue": 636123.52
+  }
+ ],
+ "product_revenue": [
+  {
+   "category": "Fashion",
+   "product": "Running Shoes",
+   "units": 651,
+   "revenue": 1312145.27
+  },
+  {
+   "category": "Fashion",
+   "product": "Denim Jacket",
+   "units": 505,
+   "revenue": 1289570.1
+  },
+  {
+   "category": "Electronics",
+   "product": "Bluetooth Speaker",
+   "units": 569,
+   "revenue": 994112.06
+  },
+  {
+   "category": "Electronics",
+   "product": "USB-C Cable",
+   "units": 446,
+   "revenue": 121397.79
+  },
+  {
+   "category": "Stationery",
+   "product": "Notebook Pack",
+   "units": 487,
+   "revenue": 112795.76
+  },
+  {
+   "category": "Stationery",
+   "product": "Gel Pen Set",
+   "units": 553,
+   "revenue": 75475.03
+  },
+  {
+   "category": "Home",
+   "product": "Steel Water Bottle",
+   "units": 496,
+   "revenue": 204083.88
+  },
+  {
+   "category": "Grocery",
+   "product": "Almonds 500g",
+   "units": 475,
+   "revenue": 188899.31
+  },
+  {
+   "category": "Grocery",
+   "product": "Green Tea Box",
+   "units": 549,
+   "revenue": 130412.94
+  },
+  {
+   "category": "Home",
+   "product": "Desk Lamp",
+   "units": 525,
+   "revenue": 432039.64
+  },
+  {
+   "category": "Electronics",
+   "product": "Wireless Mouse",
+   "units": 573,
+   "revenue": 372914.81
+  },
+  {
+   "category": "Fashion",
+   "product": "Cotton T-Shirt",
+   "units": 538,
+   "revenue": 243750.07
+  }
+ ],
+ "payment_mode_analysis": [
+  {
+   "payment_mode": "Cash on Delivery",
+   "orders": 823,
+   "gross_amount": 2199173.28,
+   "avg_order_value": 2672.14
+  },
+  {
+   "payment_mode": "Credit Card",
+   "orders": 806,
+   "gross_amount": 2035872.12,
+   "avg_order_value": 2525.9
+  },
+  {
+   "payment_mode": "Net Banking",
+   "orders": 778,
+   "gross_amount": 2020262.93,
+   "avg_order_value": 2596.74
+  },
+  {
+   "payment_mode": "Debit Card",
+   "orders": 852,
+   "gross_amount": 2068310.55,
+   "avg_order_value": 2427.59
+  },
+  {
+   "payment_mode": "UPI",
+   "orders": 836,
+   "gross_amount": 2019226.89,
+   "avg_order_value": 2415.34
+  }
+ ],
+ "rejection_reasons": [
+  {
+   "reason": "R2_invalid_quantity",
+   "count": 275
+  },
+  {
+   "reason": "R3_invalid_unit_price",
+   "count": 170
+  },
+  {
+   "reason": "R1_missing_city",
+   "count": 168
+  },
+  {
+   "reason": "DUP_duplicate_order_id",
+   "count": 166
+  },
+  {
+   "reason": "R5_invalid_order_date",
+   "count": 133
+  },
+  {
+   "reason": "R4_invalid_discount",
+   "count": 132
+  },
+  {
+   "reason": "R6_unknown_payment_mode",
+   "count": 129
+  }
+ ],
+ "sample_rejected": [
+  {
+   "order_id": "ORD000011",
+   "city": "Hyderabad",
+   "quantity": -2,
+   "unit_price": 294.22,
+   "payment_mode": "Net Banking",
+   "rejection_reasons": "R2_invalid_quantity"
+  },
+  {
+   "order_id": "ORD000017",
+   "city": "Delhi",
+   "quantity": 4,
+   "unit_price": 2299.66,
+   "payment_mode": "UPI",
+   "rejection_reasons": "R4_invalid_discount"
+  },
+  {
+   "order_id": "ORD000073",
+   "city": "Chennai",
+   "quantity": 5,
+   "unit_price": 0.0,
+   "payment_mode": "Net Banking",
+   "rejection_reasons": "R3_invalid_unit_price"
+  },
+  {
+   "order_id": "ORD000096",
+   "city": "Hyderabad",
+   "quantity": 4,
+   "unit_price": 1908.57,
+   "payment_mode": "Barter",
+   "rejection_reasons": "R6_unknown_payment_mode"
+  },
+  {
+   "order_id": "ORD000096",
+   "city": "Hyderabad",
+   "quantity": 4,
+   "unit_price": 1908.57,
+   "payment_mode": "Barter",
+   "rejection_reasons": "R6_unknown_payment_mode; DUP_duplicate_order_id"
+  },
+  {
+   "order_id": "ORD000126",
+   "city": "Aurangabad",
+   "quantity": 4,
+   "unit_price": 521.65,
+   "payment_mode": "Debit Card",
+   "rejection_reasons": "DUP_duplicate_order_id"
+  },
+  {
+   "order_id": "ORD000137",
+   "city": "Mumbai",
+   "quantity": -2,
+   "unit_price": 667.57,
+   "payment_mode": "Net Banking",
+   "rejection_reasons": "R2_invalid_quantity"
+  },
+  {
+   "order_id": "ORD000213",
+   "city": "Hyderabad",
+   "quantity": 4,
+   "unit_price": 664.44,
+   "payment_mode": "Cash on Delivery",
+   "rejection_reasons": "R4_invalid_discount"
+  },
+  {
+   "order_id": "ORD000217",
+   "city": "Hyderabad",
+   "quantity": 2,
+   "unit_price": 726.58,
+   "payment_mode": "Barter",
+   "rejection_reasons": "R6_unknown_payment_mode"
+  },
+  {
+   "order_id": "ORD000226",
+   "city": "Bengaluru",
+   "quantity": 3,
+   "unit_price": 440.15,
+   "payment_mode": "Barter",
+   "rejection_reasons": "R6_unknown_payment_mode"
+  },
+  {
+   "order_id": "ORD000241",
+   "city": "Chennai",
+   "quantity": 3,
+   "unit_price": 1868.87,
+   "payment_mode": "Net Banking",
+   "rejection_reasons": "R4_invalid_discount"
+  },
+  {
+   "order_id": "ORD000247",
+   "city": null,
+   "quantity": 5,
+   "unit_price": 690.34,
+   "payment_mode": "Net Banking",
+   "rejection_reasons": "R1_missing_city"
+  }
+ ],
+ "counts": {
+  "bronze_rows": 5166,
+  "silver_valid": 4095,
+  "silver_rejected": 1071,
+  "delivered_orders": 2123
+ },
+ "reconciliation": {
+  "silver_delivered_revenue": 5477596.66,
+  "city_sales": 5477596.66,
+  "city_sales_ok": true,
+  "category_sales": 5477596.66,
+  "category_sales_ok": true,
+  "product_revenue": 5477596.66,
+  "product_revenue_ok": true,
+  "silver_all_valid_amount": 10342845.77,
+  "payment_mode_analysis": 10342845.77,
+  "payment_mode_analysis_ok": true
+ }
+}
